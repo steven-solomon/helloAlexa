@@ -29,7 +29,7 @@ describe('Hello', function() {
   });
 
   context('LaunchRequest', function() {
-    it('returns speechlette response', function() {
+    it('return speechlet response', function() {
       var event = { request: { type: 'LaunchRequest' }}
       var spyContext = jasmine.createSpyObj('context', ['succeed']);
 
