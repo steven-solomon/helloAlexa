@@ -13,7 +13,7 @@ module.exports.handler = function(event, context) {
       response: {
         outputSpeech: {
           type: "PlainText",
-          text: "Hello World"
+          text: 'I was a gift from your brother Matt!'
         },
         shouldEndSession: true
       }
