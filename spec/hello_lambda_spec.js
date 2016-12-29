@@ -28,7 +28,7 @@ describe('Hello', function() {
     });
   });
 
-  context('valid request', function() {
+  context('LaunchRequest', function() {
     it('returns speechlette response', function() {
       var event = { request: { type: 'LaunchRequest' }}
       var spyContext = jasmine.createSpyObj('context', ['succeed']);
@@ -48,6 +48,41 @@ describe('Hello', function() {
       };
 
       expect(spyContext.succeed).toHaveBeenCalledWith(expectedResponse);
+    });
+  });
+
+  context('IntentRequest', function() {
+    it('returns speechlette response', function() {
+      var event = { request: { type: 'IntentRequest' }}
+      var spyContext = jasmine.createSpyObj('context', ['succeed']);
+
+      hello_lambda(event, spyContext)
+
+      var expectedResponse = {
+        version: "1.0",
+        sessionAttributes: {},
+        response: {
+          outputSpeech: {
+            type: "PlainText",
+            text: "I was a gift from your brother Matt!"
+          },
+          shouldEndSession: true
+        }
+      };
+
+      expect(spyContext.succeed).toHaveBeenCalledWith(expectedResponse);
+    });
+  });
+
+  context('SessionEndedRequest', function () {
+    it('returns empyt response', function () {
+      var event = { request: { type: 'SessionEndedRequest' }}
+      var spyContext = jasmine.createSpyObj('context', ['succeed', 'fail']);
+
+      hello_lambda(event, spyContext)
+
+      expect(spyContext.succeed).not.toHaveBeenCalled();
+      expect(spyContext.fail).not.toHaveBeenCalled();
     });
   });
 });
